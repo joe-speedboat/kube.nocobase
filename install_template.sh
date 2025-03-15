@@ -56,7 +56,9 @@ do
   kubectl apply -f runtime/$y
 done
 
-echo "all done, now login as admin:
+echo "
+
+all done, now login as admin:
 Here are te defaults, change it now:
 User name: admin@nocobase.com
 Password: admin123
