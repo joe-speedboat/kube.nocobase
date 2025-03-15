@@ -1,0 +1,52 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: __NAMESPACE__
+  namespace: __NAMESPACE__
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: __NAMESPACE__
+  template:
+    metadata:
+      labels:
+        app: __NAMESPACE__
+    spec:
+      containers:
+      - name: __NAMESPACE__
+        image: nocobase/nocobase:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: APP_KEY
+          valueFrom:
+            secretKeyRef:
+              name: __NAMESPACE__-secrets
+              key: app-key
+        - name: DB_DIALECT
+          value: "mariadb"
+        - name: DB_HOST
+          value: mariadb
+        - name: DB_DATABASE
+          value: __NAMESPACE__
+        - name: DB_USER
+          value: root
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: __NAMESPACE__-secrets
+              key: mysql-root-password
+        - name: DB_UNDERSCORED
+          value: "true"
+        - name: TZ
+          value: "Europe/Zurich"
+        volumeMounts:
+        - name: storage
+          mountPath: /app/nocobase/storage
+      volumes:
+      - name: storage
+        persistentVolumeClaim:
+          claimName: __NAMESPACE__-storage
+

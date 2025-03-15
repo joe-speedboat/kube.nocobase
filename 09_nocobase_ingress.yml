@@ -1,0 +1,21 @@
+# semaphore-ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: __NAMESPACE__-ingress
+  namespace: __NAMESPACE__
+  annotations:
+    kubernetes.io/spec.ingressClassName: traefik
+spec:
+  rules:
+    - host: __HOST__
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: __NAMESPACE__
+                port:
+                  number: 80
+
