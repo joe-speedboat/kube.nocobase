@@ -13,12 +13,10 @@ NAMESPACE=nocobase
 # Public URL
 HOST=noco.domain.tld
 
-# Generate MySQL password (used for both MYSQL_PASSWORD and SEMAPHORE_DB_PASS)
+# Generate secrets
 MYSQL_PASSWORD=$(genpasswd)
 MYSQL_ROOT_PASSWORD=$(genpasswd)
-
-# Generate access key encryption key
-APP_KEY=$(head -c32 /dev/urandom | base64)
+APP_KEY=$(genpasswd)
 
 # convert secrets
 MYSQL_PASSWORD_BASE64=$(echo -n "$MYSQL_PASSWORD" | base64)
