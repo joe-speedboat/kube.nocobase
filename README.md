@@ -1,4 +1,7 @@
 # Setup Nocobase on K3S
+* https://www.nocobase.com/
+https://github.com/user-attachments/assets/a50c100a-4561-4e06-b2d2-d48098659ec0
+
 ## Prepare config
 ```
 cp -av install_template.sh myinstall.sh
